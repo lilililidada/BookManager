@@ -13,20 +13,20 @@ import cn.wzz.BookManager.model.Book;
 @Mapper
 public interface BookDAO {
 
-	String table_name = "BookManager";
+	String table_name = "book";
 	String insert_field = "name, author, price";
 	String select_field = "id, status, "+insert_field;
 	
 	@Insert({"insert into ", table_name, "(", insert_field, ") values (#{name},#{author},#{price})"})
 	public int addBook(Book book);
 	
-	@Select({"Select * form ",table_name," where id= #{id}"})
+	@Select({"Select * from ",table_name," where id= #{id}"})
 	public Book selectBookById(int id);
 	
-	@Select({"select * form ",table_name," where name=#{name}"})
+	@Select({"select * from ",table_name," where name=#{name}"})
 	public Book selectBookByName(String name);
 	
-	@Update({"update ",table_name," set status=#{status} where id=#{id}"})
+	@Update({"update ", table_name, " set status=#{status} where id=#{id}"})
 	public void updateBookStatus(@Param("id") int id, @Param("status") int status);
 	
 	@Select({"select * from ",table_name})
