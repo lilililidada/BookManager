@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cn.wzz.BookManager.dao.BookDAO;
 import cn.wzz.BookManager.model.Book;
+import cn.wzz.BookManager.model.enums.BookStatusEnum;
 
 @Service
 public class BookService {
@@ -18,7 +19,7 @@ public class BookService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 	
-	public List<Book> getAllBookds(){
+	public List<Book> getAllBooks(){
 		try {
 			return dao.selectAll();
 		}catch(Exception e) {
@@ -55,6 +56,12 @@ public class BookService {
 		}
 	}
 	
+	public void deleteBook(int id , int status) {
+		dao.updateBookStatus(id, BookStatusEnum.DELETE.getValue());
+	}
 	
+	public void recoverBook(int id , int status) {
+		dao.updateBookStatus(id, BookStatusEnum.NORMAL.getValue());
+	}
 
 }
